@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block content %}
+<article class="article-content">
+    {# Article Header #}
+    <header class="article-header">
+        <h1>{{ article.title }}</h1>
+        <div class="article-meta">
+            <span class="article-date">{{ article.date.strftime('%B %d, %Y') }}</span>
+        </div>
+    </header>
+
+    {# Article Content #}
+    <div class="article-body">
+        {{ article.content }}
+    </div>
+
+    {# Article Footer #}
+    <footer class="article-footer">
+        <div class="article-meta-footer">
+            {% if DISPLAY_CATEGORY_ON_POST and article.category %}
+                <div class="article-category">
+                    <span class="meta-label">Category</span>
+                    <a href="{{ SITEURL }}/{{ article.category.url }}" class="tag category-tag">{{ article.category.name }}</a>
+                </div>
+            {% endif %}
+            
+            {% if article.tags %}
+                <div class="article-tags">
+                    <span class="meta-label">Tags</span>
+                    <div class="tags-list">
+                        {% for tag in article.tags %}
+                            <a href="{{ SITEURL }}/{{ tag.url }}" class="tag">{{ tag.name }}</a>
+                        {% endfor %}
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+    </footer>
+</article>
+
+{% endblock %}

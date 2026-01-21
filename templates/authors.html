@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="articles">
+    <h1 class="section-title">Authors</h1>
+    
+    {% if authors %}
+    <ul class="category-list">
+        {% for author, articles in authors %}
+        <li class="category-item">
+            <h3><a href="{{ SITEURL }}/{{ author.url }}">{{ author }}</a></h3>
+            <p>{{ articles|length }} article{{ 's' if articles|length != 1 else '' }}</p>
+        </li>
+        {% endfor %}
+    </ul>
+    {% else %}
+    <p>No authors found.</p>
+    {% endif %}
+</section>
+
+{# Add spacing after the section #}
+<div style="margin-bottom: 4rem;"></div>
+{% endblock %}

@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% from "macros.html" import article_list %}
+
+{% block content %}
+{# Hero Section #}
+<section class="hero">
+    {% if DISPLAY_AUTHOR_ON_HOMEPAGE %}
+        <h1 class="hero-title">Hi, I'm {{ AUTHOR.split()[0] if AUTHOR.split() else AUTHOR }}</h1>
+    {% endif %}
+    {% if SITEDESCRIPTION %}<p class="hero-description">{{ SITEDESCRIPTION }}</p>{% endif %}
+</section>
+
+{# Latest Articles #}
+{% if articles %}
+{% set homepage_articles = HOMEPAGE_ARTICLES_COUNT | default(5) %}
+<div class="section-divider"></div>
+<section class="articles">
+    {{ article_list(articles[:homepage_articles]) }}
+
+    {% if articles|length > homepage_articles %}
+    <div class="text-center mt-4">
+        <a href="{{ SITEURL }}/archives.html" class="btn">View All Posts</a>
+    </div>
+    {% endif %}
+</section>
+{% endif %}
+
+{# Projects Section (Optional) #}
+{% if DISPLAY_LINKS_ON_HOMEPAGE and LINKS %}
+<div class="section-divider"></div>
+<section class="projects">
+    <h2 class="section-title">Projects</h2>
+    <div class="project-list">
+        {% for name, url in LINKS %}
+        <div class="project-item">
+            <h3>
+                <a href="{{ url }}" target="_blank" rel="noopener">{{ name }}</a>
+                <svg class="external-link-icon" width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                    <path d="M14,3V5H17.59L7.76,14.83L9.17,16.24L19,6.41V10H21V3M19,19H5V5H12V3H5C3.89,3 3,3.9 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V12H19V19Z"/>
+                </svg>
+            </h3>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+{% endif %}
+{% endblock %}

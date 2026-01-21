@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="articles">
+    <h1 class="section-title">Tags</h1>
+    
+    {% if tags %}
+    <div class="tag-cloud">
+        {% for tag, articles in tags %}
+        <a href="{{ SITEURL }}/{{ tag.url }}" class="tag tag-cloud-item">
+            {{ tag.name }} ({{ articles|length }})
+        </a>
+        {% endfor %}
+    </div>
+    {% else %}
+    <p>No tags found.</p>
+    {% endif %}
+</section>
+{% endblock %}

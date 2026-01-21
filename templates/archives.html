@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% from "macros.html" import article_list %}
+
+{% block content %}
+<section class="articles">
+    <h1 class="section-title">All Posts</h1>
+    {{ article_list(articles) }}
+</section>
+{% endblock %}

@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="articles">
+    <h1 class="section-title">Categories</h1>
+    
+    {% if categories %}
+    <ul class="category-list">
+        {% for category, articles in categories %}
+        <li class="category-item">
+            <h3><a href="{{ SITEURL }}/{{ category.url }}">{{ category.name }}</a></h3>
+            <p>{{ articles|length }} article{{ 's' if articles|length != 1 else '' }}</p>
+        </li>
+        {% endfor %}
+    </ul>
+    {% else %}
+    <p>No categories found.</p>
+    {% endif %}
+</section>
+{% endblock %}

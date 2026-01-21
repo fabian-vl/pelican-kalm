@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% from "macros.html" import article_list %}
+
+{% block content %}
+<section class="articles">
+    <h1 class="section-title">Articles in: '{{ category.name }}'</h1>
+    {{ article_list(articles, "No articles found in this category.") }}
+</section>
+{% endblock %}
